@@ -1,0 +1,27 @@
+---
+version: '3'
+
+services:
+  teamcity:
+    image: jetbrains/teamcity-server:latest
+    container_name:
+      teamcity
+    ports:
+     - 8112:8111
+    environment:
+      - TEAMCITY_SERVER_MEM_OPTS="-Xmx750m"
+    volumes:
+      - ./data:/data/teamcity_server/datadir
+      - ./logs:/opt/teamcity/logs
+  
+  teamcity-agent:
+    image: jetbrains/teamcity-agent:latest
+    container_name:
+      teamcity-agent
+    depends_on:
+      - teamcity
+    environment:
+      - SERVER_URL=http://teamcity:8111
+      - AGENT_NAME=docker_agent
+    volumes:
+      - ./agentconf:/data/teamcity_agent/conf
