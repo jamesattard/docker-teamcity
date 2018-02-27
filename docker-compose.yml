@@ -14,8 +14,9 @@ services:
     environment:
       - TEAMCITY_SERVER_MEM_OPTS="-Xmx750m"
     volumes:
-      - ./data:/data/teamcity_server/datadir
-      - ./logs:/opt/teamcity/logs
+      - ./server_data:/data/teamcity_server/datadir
+      - ./server_logs:/opt/teamcity/logs
+      - ./server_root:/root
   
   teamcity-agent:
     image: 
@@ -30,4 +31,5 @@ services:
       - SERVER_URL=http://teamcity:8111
       - AGENT_NAME=docker_agent
     volumes:
-      - ./agentconf:/data/teamcity_agent/conf
+      - ./agent_conf:/data/teamcity_agent/conf
+      - ./agent_root:/root

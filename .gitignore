@@ -1,3 +1,7 @@
-agentconf/
-data/
-logs/
+agent_conf/
+agent_root/
+server_data/
+server_logs/
+server_root/
+
+
