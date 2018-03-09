@@ -2,6 +2,15 @@
 version: '3'
 
 services:
+  nexus:
+    image:
+      sonatype/nexus:latest
+    hostname:
+      nexus
+    container_name:
+      nexus
+    ports:
+      - 8081:8081
   teamcity:
     image: 
       jetbrains/teamcity-server:latest
@@ -10,7 +19,7 @@ services:
     container_name:
       teamcity
     ports:
-     - 8112:8111
+      - 8111:8111
     environment:
       - TEAMCITY_SERVER_MEM_OPTS="-Xmx750m"
     volumes:
